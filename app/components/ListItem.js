@@ -11,6 +11,7 @@ import colors from "../config/colors";
 import AppText from "./AppText";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Swipeable from "react-native-gesture-handler/Swipeable";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 function ListItem({
   title,
@@ -22,25 +23,28 @@ function ListItem({
 }) {
   return (
     <Swipeable renderRightActions={renderRightActions}>
-      <View style={styles.container}>
-        {IconComponent}
-        {image && <Image style={styles.image} source={image} />}
-        <View style={styles.detailsContainer}>
-          <AppText style={styles.title} numberofLines={1}>
-            {title}
-          </AppText>
-          {subTitle && (
-            <AppText style={styles.subTitle} numberofLines={2}>
-              {subTitle}
+      <TouchableWithoutFeedback onPress={onPress}>
+        <View style={styles.container}>
+          {IconComponent}
+
+          {image && <Image style={styles.image} source={image} />}
+          <View style={styles.detailsContainer}>
+            <AppText style={styles.title} numberofLines={1}>
+              {title}
             </AppText>
-          )}
+            {subTitle && (
+              <AppText style={styles.subTitle} numberofLines={2}>
+                {subTitle}
+              </AppText>
+            )}
+          </View>
+          <MaterialCommunityIcons
+            color={colors.medium}
+            name="chevron-right"
+            size={25}
+          />
         </View>
-        <MaterialCommunityIcons
-          color={colors.medium}
-          name="chevron-right"
-          size={25}
-        />
-      </View>
+      </TouchableWithoutFeedback>
     </Swipeable>
   );
 }

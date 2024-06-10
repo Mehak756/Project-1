@@ -3,13 +3,17 @@ import { View, Image, StyleSheet } from "react-native";
 import AppText from "../components/AppText";
 import colors from "../config/colors";
 import ListItem from "../components/ListItem";
-function ListingDetailsScreen(props) {
+import Screen from "../components/Screen";
+import { SafeAreaView } from "react-native-safe-area-context";
+import routes from "../navigation/routes";
+function ListingDetailsScreen({ route }) {
+  const listing = route.params;
   return (
     <View>
-      <Image style={styles.image} source={require("../assets/jacket.jpg")} />
+      <Image style={styles.image} source={listing.image} />
       <View style={styles.detailsContainer}>
-        <AppText style={styles.title}>Red jackets for sale</AppText>
-        <AppText style={styles.price}> $100</AppText>
+        <AppText style={styles.title}>{listing.title}</AppText>
+        <AppText style={styles.price}> ${listing.price}</AppText>
         <View style={styles.userContainer}>
           <ListItem
             image={require("../assets/mosh.jpg")}
@@ -26,9 +30,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 300,
   },
-  detailsContainer: {
-    padding: 20,
-  },
+
   title: {
     fontSize: 24,
     fontWeight: "500",
